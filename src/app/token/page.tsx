@@ -1,10 +1,9 @@
+import Navbar from "@/components/navbar";
 import { FC } from "react";
 
 const TokenPage: FC = () => {
   return (
-      <div>
-          Token Page
-      </div>
+      <Navbar />
      
   );
 };

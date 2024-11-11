@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 const Navbar = () => {
@@ -72,9 +73,9 @@ const Navbar = () => {
                 <div className="h-full pb-4 overflow-y-auto bg-white">
                     <ul className="space-y-2 font-light">
                         <li>
-                            <a href="/" className="flex items-center p-3 text-gray-900 group hover:bg-[rgba(118,155,206,0.2)] hover:border-l-4 hover:border-[#769BCE] group">
-                                <span className="ms-5">Configuración</span>
-                            </a>
+                        <Link href="/" className="flex items-center p-3 text-gray-900 group hover:bg-[rgba(118,155,206,0.2)] hover:border-l-4 hover:border-[#769BCE] group">
+                            <span className="ms-5">Configuración</span>
+                        </Link>
                         </li>
                         <li>
                             <a href="diagnosis" className="flex items-center p-3 text-gray-900 group hover:bg-[rgba(118,155,206,0.2)] hover:border-l-4 hover:border-[#769BCE] group">
