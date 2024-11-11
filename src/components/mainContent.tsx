@@ -3,8 +3,9 @@
 const MainContent = () => {
     return (
 <>
-    <div className="p-4 sm:ml-96 grid grid-cols-6 gap-10">
-        <div className="mt-28 mb-20 col-span-4 p-16 border-gray-200 rounded-3xl shadow-2xl bg-white dark:border-gray-700 mt-16">
+    <div className="lg:p-4 lg:ml-96 grid grid-cols-1 lg:grid-cols-6 gap-10 bg-white lg:bg-inherit">
+        
+        <div className="lg:mt-28 lg:mb-20 col-span-4 p-10 lg:p-16 lg:border-gray-200 lg:rounded-3xl lg:shadow-2xl bg-white dark:border-gray-700 lg:mt-16 mt-16">
             <h1 className="pb-10">GlauApp referencia documentación de API</h1>
             <p className="pb-10">
                 El glaucoma es una enfermedad ocular que puede provocar la pérdida de visión irreversible si no se detecta a tiempo. GlauApp utiliza algoritmos avanzados para detectar la excavidad del nervio óptico y el área neuroretiniana, permitiendo un diagnóstico inicial que puede guiar a los profesionales en la toma de decisiones informadas sobre el manejo y tratamiento del paciente.
@@ -41,16 +42,16 @@ const MainContent = () => {
             <p className="pb-3">· Fabio Luis Buitrago Ochoa</p>
             <p className="pb-3">· Felipe García Castilblanco</p>
             <p className="pb-10">· Luisa Lorena Parra Nivia</p>
-            <div className="flex ms-2 md:me-24 pb-6">
+            <div className="flex ms-2 md:me-24 lg:pb-6">
                 <img src="logoGlauApp.svg" className="h-8 me-3" />
-                <span className="self-center text-xl font-medium sm:text-2xl whitespace-nowrap dark:text-black">
+                <span className="self-center text-xl font-medium lg:text-2xl whitespace-nowrap dark:text-black">
                     <span style={{ color: '#769BCE' }}>Glau</span>DOCS
                 </span>
             </div>
         </div>
         
-        <div className="col-span-2 mt-20">
-            <p style={{ color: '#769BCE' }} className="text-xs mt-24 mb-6 font-medium text-xl">En esta página</p>
+        <div className="col-span-2 hidden lg:block lg:mt-20">
+            <p style={{ color: '#769BCE' }} className="text-xs lg:mt-24 mb-6 font-medium text-xl">En esta página</p>
             <ul className="space-y-1 font-light">
                 <li>
                     <a href="" className="text-xs flex items-center p-3 text-gray-900 group hover:bg-[rgba(118,155,206,0.2)] hover:border-l-4 hover:border-[#769BCE] group">
