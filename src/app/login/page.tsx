@@ -1,11 +1,13 @@
 import { FC } from "react";
+import Header from "./components/header";
+import LoginForm from "./components/loginForm";
 
 const LoginPage: FC = () => {
   return (
-      <div>
-          Login page
-      </div>
-     
+    <div>
+      <Header />
+      <LoginForm />
+    </div>
   );
 };
 
