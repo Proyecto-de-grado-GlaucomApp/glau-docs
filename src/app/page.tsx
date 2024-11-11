@@ -18,7 +18,7 @@ export default function Home() {
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           {/* 3 column grid */}
           <div className="grid grid-cols-3 gap-4 mb-4">
-            {Array(3).fill(null).map((_, idx) => <GridItem />)}
+            {Array(3).fill(null).map((_) => <GridItem />)}
           </div>
           {/* 1 large item */}
           <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
@@ -30,7 +30,7 @@ export default function Home() {
           </div>
           {/* 2 column grid */}
           <div className="grid grid-cols-2 gap-4 mb-4">
-            {Array(4).fill(null).map((_, idx) => <GridItem />)}
+            {Array(4).fill(null).map((_) => <GridItem />)}
           </div>
           {/* Another large item */}
           <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
@@ -42,7 +42,7 @@ export default function Home() {
           </div>
           {/* 2 column grid */}
           <div className="grid grid-cols-2 gap-4">
-            {Array(4).fill(null).map((_, idx) => <GridItem/>)}
+            {Array(4).fill(null).map((_) => <GridItem/>)}
           </div>
         </div>
       </div>
