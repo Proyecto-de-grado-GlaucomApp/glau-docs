@@ -2,7 +2,7 @@
 
 const SignUpForm = () => {
     return (
-        <section className="flex flex-col items-center justify-center fixed h-full w-full bg-white">
+        <section className="flex flex-col items-center justify-center fixed h-full w-full bg-white mt-20">
             <div className="mt-14 py-8 w-full max-w-4xl">
                 <h3 className="flex items-center justify-center mb-6 text-3xl sm:text-4xl font-semibold">
                     Crea una cuenta gratuita
