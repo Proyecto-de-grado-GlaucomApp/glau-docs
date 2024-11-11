@@ -13,3 +13,13 @@ body {
   background: var(--background);
   font-family: 'Lexend Deca', sans-serif;
 }
+
+h1 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+p {
+  font-size: 0.8rem;
+  font-weight: 300; 
+}

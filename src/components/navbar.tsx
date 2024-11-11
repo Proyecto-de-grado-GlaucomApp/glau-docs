@@ -26,8 +26,10 @@ const Navbar = () => {
                         }
 
                         <div className="flex ms-2 md:me-24">
-                            <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 me-3" alt="FlowBite Logo" />
-                            <span className="self-center text-xl font-medium sm:text-2xl whitespace-nowrap dark:text-black">GlauDOCS</span>
+                            <img src="logoGlauApp.svg" className="h-8 me-3" />
+                            <span className="self-center text-xl font-medium sm:text-2xl whitespace-nowrap dark:text-black">
+                                <span style={{ color: '#769BCE' }}>Glau</span>DOCS
+                            </span>
                         </div>
                     </div>
                     <div className="flex items-center">
