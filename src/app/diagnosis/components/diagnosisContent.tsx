@@ -53,57 +53,57 @@ const DiagnosisContent = () => {
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">3</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"imageUrl":</h5>
-                    <h5 className="text-[#73C8C0]">"https://imagen.com/image_id.jpg"</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;imageUrl&quot;:</h5>
+                    <h5 className="text-[#73C8C0]">&quot;https://imagen.com/image_id.jpg&quot;</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">4</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"imageId":</h5>
-                    <h5 className="text-[#73C8C0]">"image_id.png",</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;imageId&quot;:</h5>
+                    <h5 className="text-[#73C8C0]">&quot;image_id.png&quot;,</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">5</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"distanceRatio":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;distanceRatio&quot;:</h5>
                     <h5 className="text-[#73C8C0]">0.176,</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">6</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"perimeterRatio":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;perimeterRatio&quot;:</h5>
                     <h5 className="text-[#73C8C0]">0.7,</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">7</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"areaRatio":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;areaRatio&quot;:</h5>
                     <h5 className="text-[#73C8C0]">0.49,</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">8</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"neuroretinalRimPerimeter":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;neuroretinalRimPerimeter&quot;:</h5>
                     <h5 className="text-[#73C8C0]">594.504,</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">9</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"neuroretinalRimArea":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;neuroretinalRimArea&quot;:</h5>
                     <h5 className="text-[#73C8C0]">28134.7,</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">10</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"excavationPerimeter":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;excavationPerimeter&quot;:</h5>
                     <h5 className="text-[#73C8C0]">416.153,</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">11</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"excavationArea":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;excavationArea&quot;:</h5>
                     <h5 className="text-[#73C8C0]">13786.0,</h5>
                 </div>
                 <div className="flex flex-wrap space-x-4">
                     <h5 className="text-[#516D8F]">12</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"state":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;state&quot;:</h5>
                     <h5 className="text-[#73C8C0]">1,</h5>
                 </div>
                 <div className="flex space-x-4">
                     <h5 className="text-[#516D8F]">13</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"ddlStage":</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;ddlStage&quot;:</h5>
                     <h5 className="text-[#73C8C0]">4</h5>
                 </div>
                 <div className="flex space-x-4">
@@ -132,19 +132,19 @@ const DiagnosisContent = () => {
 
                 <div className="flex space-x-4 flex-wrap">
                     <h5 className="text-[#516D8F]">3</h5>
-                    <h5 className="text-[#DFB5A3] pl-5">"error": {"{"}</h5>
+                    <h5 className="text-[#DFB5A3] pl-5">&quot;error&quot;: {"{"}</h5>
                 </div>
 
                 <div className="flex space-x-4 flex-wrap">
                     <h5 className="text-[#516D8F]">4</h5>
-                    <h5 className="text-[#DFB5A3] pl-10">"status": </h5>
+                    <h5 className="text-[#DFB5A3] pl-10">&quot;status&quot;: </h5>
                     <h5 className="text-[#73C8C0]">400,</h5>
                 </div>
 
                 <div className="flex space-x-4 flex-wrap">
                     <h5 className="text-[#516D8F]">5</h5>
-                    <h5 className="text-[#DFB5A3] pl-10">"message":</h5>
-                    <h5 className="text-[#73C8C0]">"string"</h5>
+                    <h5 className="text-[#DFB5A3] pl-10">&quot;message&quot;:</h5>
+                    <h5 className="text-[#73C8C0]">&quot;string&quot;</h5>
                 </div>
 
                 <div className="flex space-x-4 flex-wrap">
@@ -161,9 +161,9 @@ const DiagnosisContent = () => {
                 </div>
             </div>
             <p className= 'font-bold mt-5'>Achivo no proporcionado o vacío.</p>
-            <p>· Mensaje de error: "No file provided or file is empty."</p>
+            <p>· Mensaje de error: &quot;No file provided or file is empty.&quot;</p>
             <p className= 'font-bold mt-5'>Error en la solicitud hacia el servicio de procesamiento de imágenes.</p>
-            <p>· Mensaje de error: "Request error: [Descripción del error del cliente]"  </p>
+            <p>· Mensaje de error: &quot;Request error: [Descripción del error del cliente]&quot;</p>
         </div>
         
         <div className="col-span-2 hidden lg:block lg:mt-20">
