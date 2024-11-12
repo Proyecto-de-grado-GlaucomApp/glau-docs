@@ -1,6 +1,6 @@
 "use client";
 
-import { loginService } from "@/service/loginService";
+import { signUpService } from "@/service/signUpService";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from 'next/navigation';
@@ -19,43 +19,42 @@ const SignUpForm = () => {
     const [entity, setEntity] = useState("");
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-        // Llamada al servicio de login
-        const response = await loginService.login({
-            email,
-            password,
-            confirmPassword,
-            username,
-            entity,
-        });
-        
-        if (response.success){
-            Swal.fire({
-                icon: "success",
-                title: "Registro exitoso",
-                text: "Usuario registrado correctamente",
-              });
-            console.log("s")
-            router.push('/login');
-        }
-        else {
+        e.preventDefault();
+        try {
+            // Llamada al servicio de Sign Up
+            const response = await signUpService.signUp({
+                email,
+                password,
+                confirmPassword,
+                username,
+                entity,
+            });
+            
+            if (response.success){
+                Swal.fire({
+                    icon: "success",
+                    title: "Registro exitoso",
+                    text: "Usuario registrado correctamente",
+                });
+                router.push('/login');
+            }
+            else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: response.message ? response.message[0] : "Verifica la información",
+                    footer: "Verifica la información",
+                });
+            }
+            
+        } catch {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: response.message ? response.message[0] : "Verifica la información",
-                footer: "Verifica la información",
-              });
+                text: "Ocurrió un error inesperado",
+                footer: 'Estamos teniendo problemas para conectarnos con el servidor'
+            });
         }
-        
-    } catch {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Ocurrió un error inesperado",
-            footer: 'Estamos teniendo problemas para conectarnos con el servidor'
-          });
-    }
     }
 
     return (

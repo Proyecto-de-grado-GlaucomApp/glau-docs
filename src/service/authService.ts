@@ -1,14 +1,16 @@
+import { User } from "@/user/entities";
+
 /**
- * Servicio para gestionar la autenticación del usuario.
- * Este servicio maneja la verificación del estado de autenticación,
- * el almacenamiento del usuario en el localStorage y el manejo del login y logout.
+ * Service to manage user authentication.
+ * This service handles the verification of authentication status,
+ * user storage in localStorage, and login/logout management.
  */
 export const authService = {
     /**
-     * Verifica si el usuario está autenticado.
-     * Verifica si hay un usuario guardado en el localStorage.
+     * Checks if the user is authenticated.
+     * Verifies if there is a user stored in localStorage.
      * 
-     * @returns {boolean} Retorna `true` si el usuario está autenticado (existe en localStorage), de lo contrario `false`.
+     * @returns {boolean} Returns `true` if the user is authenticated (exists in localStorage), otherwise `false`.
      */
     isAuthenticated: (): boolean => {
       const user = localStorage.getItem('user');
@@ -16,32 +18,31 @@ export const authService = {
     },
   
     /**
-     * Obtiene el usuario almacenado en el localStorage.
+     * Retrieves the stored user from localStorage.
      * 
-     * @returns {string | null} El usuario almacenado en formato `User` si existe, o `null` si no se encuentra.
+     * @returns {User | null} The stored user in `User` format if present, or `null` if not found.
      */
-    getUser: (): string | null => {
+    getUser: (): User | null => {
       const user = localStorage.getItem('user');
       return user ? JSON.parse(user) : null;
     },
   
     /**
-     * Simula el inicio de sesión almacenando un usuario en el localStorage.
+     * Simulates the login process by storing a user in localStorage.
      * 
-     * @param {string} string - El objeto de usuario a almacenar en localStorage.
-     * @returns {void} No retorna ningún valor.
+     * @param {User} user - The user object to store in localStorage.
+     * @returns {void} No return value.
      */
-    login: (user: string): void => {
+    login: (user: User): void => {
       localStorage.setItem('user', JSON.stringify(user));
     },
   
     /**
-     * Simula el cierre de sesión eliminando el usuario almacenado en el localStorage.
+     * Simulates the logout process by removing the stored user from localStorage.
      * 
-     * @returns {void} No retorna ningún valor.
+     * @returns {void} No return value.
      */
     logout: (): void => {
       localStorage.removeItem('user');
-  }
+    }
 };
-

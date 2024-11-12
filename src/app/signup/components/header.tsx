@@ -14,7 +14,7 @@ const Header = () => {
                     <div className="flex items-center">
                       <div className="flex items-center ms-3 text-m font-medium">
                       <h3 className="flex items-center ms-3 hidden sm:block">¿Ya posees una cuenta gratuita?</h3>
-                      <a style={{ color: '#769BCE' }} className="flex items-center ms-3">Inicia Sesión</a>
+                      <a href="login" style={{ color: '#769BCE' }} className="flex items-center ms-3">Inicia Sesión</a>
                       </div>
                     </div>
                 </div>

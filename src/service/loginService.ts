@@ -1,47 +1,22 @@
-import { schemaSignUp } from "@/user/contracts";
-import { FormDataSignUp } from "@/user/entities";
-import { mapFormDataToApiPayload } from "@/user/mapper";
-import { SignUpResponse } from "@/user/response";
-import { API_URL } from "@/utils/constants";
+import { schemaLogIn } from "@/user/contracts";
+import { FormDataLogin, User } from "@/user/entities";
+import { ValidationResponse } from "@/user/response";
+import { AuthAction, authEndpoints } from "@/utils/constants";
+import { jwtDecode } from "jwt-decode";
 import { ValidationError } from "yup";
+import { authService } from "./authService";
 
-/**
- * Servicio de inicio de sesión que contiene la función `login`.
- * 
- * Este objeto exporta una función `login` que gestiona el proceso de inicio de sesión de un usuario. La función realiza las siguientes operaciones:
- * 1. Valida los datos del usuario utilizando un esquema de validación.
- * 2. Realiza una solicitud a la API para verificar el inicio de sesión.
- * 3. Devuelve una respuesta que indica si el inicio de sesión fue exitoso o no.
- * 
- * @export
- * @type {Object}
- * @property {Function} login - Función que maneja el inicio de sesión del usuario.
- */
+
 export const loginService = {
     login
 }
 
-/**
- * Función que maneja el proceso de inicio de sesión de un usuario.
- * 
- * Esta función valida los datos del formulario de inicio de sesión (como correo electrónico, nombre de usuario y contraseña), 
- * y luego realiza una solicitud a un servidor para verificar las credenciales del usuario.
- * 
- * @async
- * @function login
- * @param {FormDataSignUp} userData - Datos del usuario, que incluyen información como el correo electrónico, nombre de usuario, y contraseña.
- * @returns {Promise<SignUpResponse>} Respuesta con el resultado del intento de inicio de sesión.
- *    - `success: true` si el inicio de sesión fue exitoso.
- *    - `success: false` si hubo un error de validación (con mensajes detallados) o si ocurrió un error en la comunicación con el servidor.
- * 
- * @throws {ValidationError} Si ocurre un error durante las validaciones de Yup.
- * @throws {Error} Si ocurre un error en la solicitud HTTP al servidor.
- */
-export async function login(userData: FormDataSignUp): Promise<SignUpResponse> {
+
+export async function login(userData: FormDataLogin): Promise<ValidationResponse> {
 
     // Validaciones del esquema
     try {
-        await schemaSignUp.validate(userData, { abortEarly: false });
+        await schemaLogIn.validate(userData, { abortEarly: false });
     } catch (err: unknown) {
         const validationError = err as ValidationError;
         return {
@@ -50,15 +25,16 @@ export async function login(userData: FormDataSignUp): Promise<SignUpResponse> {
         };
     }
     
+    let response;
     // Validaciones del servidor
     try {
 
-        const response = await fetch(API_URL, {
+        response = await fetch(authEndpoints[AuthAction.LOGIN], {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(mapFormDataToApiPayload(userData))
+            body: JSON.stringify(userData)
         });
 
         if (response.status === 409) {
@@ -75,7 +51,25 @@ export async function login(userData: FormDataSignUp): Promise<SignUpResponse> {
             message: validationError.inner.map(e => e.message)
         };
     }
+    if (response) {
+        const jwt = await response.text();  // Esto extrae el JWT como texto
 
+        // Decodificar el JWT
+        const decoded: any = jwtDecode(jwt); // eslint-disable-line @typescript-eslint/no-explicit-any
+
+        // Extraer el email, id y rol
+        const email = decoded.email;
+        const id = decoded.sub;
+        const role = decoded.role;
+        const user: User = {
+            JWT: jwt,
+            id,
+            email,
+            role,
+        }
+
+        authService.login(user);
+    }
     // Si todas las validaciones son válidas, retorna true
     return {
         success: true,
