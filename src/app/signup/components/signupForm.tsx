@@ -2,9 +2,9 @@
 
 const SignUpForm = () => {
     return (
-        <section className="flex flex-col items-center justify-center fixed h-full w-full bg-white mt-20">
-            <div className="mt-14 py-8 w-full max-w-4xl">
-                <h3 className="flex items-center justify-center mb-6 text-3xl sm:text-4xl font-semibold">
+        <section className="lg:mt-28 flex flex-col items-center justify-center fixed w-full mg:h-full bg-white">
+            <div className="mt-16 sm:mt-24 py-8 w-full max-w-4xl">
+                <h3 className="flex items-center justify-center sm:mb-6 text-2xl sm:text-4xl font-semibold">
                     Crea una cuenta gratuita
                 </h3>
                 <div className="bg-white flex flex-col justify-center items-center md:mt-0 w-full">

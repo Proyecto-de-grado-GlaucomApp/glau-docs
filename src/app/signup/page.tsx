@@ -4,7 +4,7 @@ import SignUpForm from "./components/signupForm";
 
 const SignUpPage: FC = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="bg-white min-h-screen">
       <Header />
       <SignUpForm />
     </div>
