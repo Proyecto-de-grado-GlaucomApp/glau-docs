@@ -4,7 +4,10 @@ import TokenContent from "./components/tokenContent";
 
 const TokenPage: FC = () => {
   return (
-      <><Navbar /><TokenContent /></>
+    <>
+    <Navbar />
+    <TokenContent />
+    </>
      
   );
 };
