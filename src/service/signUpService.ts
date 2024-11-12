@@ -68,7 +68,7 @@ export async function signUp(userData: FormDataSignUp): Promise<ValidationRespon
             };
         }
 
-    } catch (err) {
+    } catch {
         return {
             success: false,
             message: ["Ocurrió un error inesperado"]

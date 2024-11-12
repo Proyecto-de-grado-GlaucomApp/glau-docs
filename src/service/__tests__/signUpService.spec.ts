@@ -1,6 +1,5 @@
 import { FormDataLogin } from "@/user/entities";
 import { ValidationResponse } from "@/user/response";
-import { AuthAction, authEndpoints } from "@/utils/constants";
 import { ValidationError } from "yup";
 import { loginService } from "../loginService";
 import { schemaLogIn } from "@/user/contracts";
@@ -16,7 +15,7 @@ jest.mock("@/user/contracts", () => ({
 }));
 
 describe("LOGIN SERVICE", () => {
-    
+
   afterEach(() => {
     jest.clearAllMocks();
   });
