@@ -69,10 +69,9 @@ export async function signUp(userData: FormDataSignUp): Promise<ValidationRespon
         }
 
     } catch (err) {
-        const validationError = err as ValidationError;
         return {
             success: false,
-            message: validationError.inner.map(e => e.message)
+            message: ["Ocurrió un error inesperado"]
         };
     }
 
