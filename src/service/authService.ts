@@ -1,5 +1,3 @@
-import { User } from "@/user/entities";
-
 /**
  * Servicio para gestionar la autenticación del usuario.
  * Este servicio maneja la verificación del estado de autenticación,
@@ -20,9 +18,9 @@ export const authService = {
     /**
      * Obtiene el usuario almacenado en el localStorage.
      * 
-     * @returns {User | null} El usuario almacenado en formato `User` si existe, o `null` si no se encuentra.
+     * @returns {string | null} El usuario almacenado en formato `User` si existe, o `null` si no se encuentra.
      */
-    getUser: (): User | null => {
+    getUser: (): string | null => {
       const user = localStorage.getItem('user');
       return user ? JSON.parse(user) : null;
     },
@@ -30,10 +28,10 @@ export const authService = {
     /**
      * Simula el inicio de sesión almacenando un usuario en el localStorage.
      * 
-     * @param {User} user - El objeto de usuario a almacenar en localStorage.
+     * @param {string} string - El objeto de usuario a almacenar en localStorage.
      * @returns {void} No retorna ningún valor.
      */
-    login: (user: User): void => {
+    login: (user: string): void => {
       localStorage.setItem('user', JSON.stringify(user));
     },
   
@@ -44,6 +42,6 @@ export const authService = {
      */
     logout: (): void => {
       localStorage.removeItem('user');
-    }
-  };
-  
+  }
+};
+
