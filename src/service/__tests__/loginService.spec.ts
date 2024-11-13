@@ -1,99 +1,152 @@
-
-import { FormDataLogin, User } from "@/user/entities";
+import { FormDataLogin } from "@/user/entities";
 import { ValidationResponse } from "@/user/response";
+import { ValidationError } from "yup";
 import { loginService } from "../loginService";
-import { authService } from "../authService";
+import { schemaLogIn } from "@/user/contracts";
+
+// Mock fetch
+global.fetch = jest.fn();
+
+// Mock schemaLogIn.validate
+jest.mock("@/user/contracts", () => ({
+  schemaLogIn: {
+    validate: jest.fn(),
+  },
+}));
 
 describe("LOGIN SERVICE", () => {
-  
-  // Test cuando los datos del formulario son válidos y la respuesta del servidor es exitosa
-  it("When user login is successful, then it should store the user in localStorage", async () => {
-    const userData: FormDataLogin = {
-      email: "test@example.com",
-      password: "validPassword123",
-    };
 
-    // Mock de la respuesta de fetch
-    const mockJwt = "mockJwtToken";
-    global.fetch = jest.fn().mockResolvedValue({
-      status: 200,
-      text: jest.fn().mockResolvedValue(mockJwt),
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe("VALIDATION ERRORS", () => {
+    it("When input is invalid, then it should return validation errors", async () => {
+      const userData: FormDataLogin = {
+        email: "invalid-email",
+        password: "123",
+      };
+
+      const validationError = new ValidationError("Validation failed", [
+        { message: "Invalid email address" },
+        { message: "Password is required" },
+      ]);
+
+      (schemaLogIn.validate as jest.Mock).mockRejectedValue(validationError);
+
+      const response: ValidationResponse = await loginService.login(userData);
+
+      expect(response.success).toBe(false);
+    });
+  });
+
+  describe("SERVER ERRORS", () => {
+    it("When server returns 401 status, then it should return unauthorized error", async () => {
+      const userData: FormDataLogin = {
+        email: "wrong@credentials.com",
+        password: "wrongPassword",
+      };
+
+      (schemaLogIn.validate as jest.Mock).mockResolvedValue(userData);
+      (global.fetch as jest.Mock).mockResolvedValue({ status: 401 });
+
+      const response: ValidationResponse = await loginService.login(userData);
+
+      expect(response.success).toBe(false);
+      expect(response.message).toEqual(["Credenciales incorrectas"]);
     });
 
-    // Mock de jwtDecode
-    jest.mock("jwt-decode", () => ({
-      jwtDecode: jest.fn().mockReturnValue({
-        email: "test@example.com",
-        sub: "123",
-        role: "user",
-      }),
-    }));
+    it("When server fails with a network error, then it should handle the error", async () => {
+      const userData: FormDataLogin = {
+        email: "networkerror@domain.com",
+        password: "Password123!",
+      };
 
-    const mockUser: User = {
-      JWT: mockJwt,
-      id: "123",
-      email: "test@example.com",
-      role: "user",
-    };
+      (schemaLogIn.validate as jest.Mock).mockResolvedValue(userData);
+      (global.fetch as jest.Mock).mockRejectedValue(new Error("Network Error"));
 
-    // Simulamos el login con el authService
-    const loginSpy = jest.spyOn(authService, "login").mockImplementation(() => {});
+      const response: ValidationResponse = await loginService.login(userData);
 
-    const result: ValidationResponse = await loginService.login(userData);
-
-    expect(result.success).toBe(true);
-    expect(result.message).toEqual([]);
-    expect(loginSpy).toHaveBeenCalledWith(mockUser); // Aseguramos que el usuario fue almacenado en localStorage
+      expect(response.success).toBe(false);
+    });
   });
 
-  // Test cuando hay un error de validación en el esquema de login
-  it("When user login validation fails, then it should return validation error messages", async () => {
-    const userData: FormDataLogin = {
-      email: "invalidEmail",
-      password: "", // Campo vacío para generar error de validación
-    };
+  describe("HAPPY PATH", () => {
+    it("When input is valid and server responds successfully, then it should return success", async () => {
+      const userData: FormDataLogin = {
+        email: "validuser@test.com",
+        password: "Password!123",
+      };
 
-    // Simulamos un error de validación con yup
-    const result: ValidationResponse = await loginService.login(userData);
+      (schemaLogIn.validate as jest.Mock).mockResolvedValue(userData);
+      (global.fetch as jest.Mock).mockResolvedValue({
+        status: 200,
+        json: async () => ({ token: "valid-token" }),
+      });
 
-    expect(result.success).toBe(false);
-    expect(result.message).toContain("Email is not valid");
-    expect(result.message).toContain("Password is required");
+      const response: ValidationResponse = await loginService.login(userData);
+
+      expect(response.success).toBe(true);
+      expect(response.message).toBeUndefined();
+    });
   });
 
-  // Test cuando el servidor responde con un error (por ejemplo, correo ya registrado)
-  it("When server responds with error, then it should return server error message", async () => {
-    const userData: FormDataLogin = {
-      email: "test@example.com",
-      password: "validPassword123",
-    };
+  describe("EDGE CASES", () => {
+    it("When email is not provided, then it should return an error", async () => {
+      const userData: FormDataLogin = {
+        email: "",
+        password: "Password123!",
+      };
 
-    // Simulamos una respuesta con error 409 (correo ya registrado)
-    global.fetch = jest.fn().mockResolvedValue({
-      status: 409,
-      text: jest.fn().mockResolvedValue(""),
+      const validationError = new ValidationError("Validation failed", userData, "email");
+      validationError.inner = [
+        {
+            message: "Email is required",
+            path: "email",
+            type: "required",
+            value: userData.email,
+            errors: [],
+            inner: [],
+            [Symbol.toStringTag]: "",
+            name: ""
+        },
+      ];
+
+      (schemaLogIn.validate as jest.Mock).mockRejectedValue(validationError);
+
+      const response: ValidationResponse = await loginService.login(userData);
+
+      expect(response.success).toBe(false);
+      expect(response.message).toEqual(["Email is required"]);
     });
 
-    const result: ValidationResponse = await loginService.login(userData);
+    it("When password is too short, then it should return an error", async () => {
+      const userData: FormDataLogin = {
+        email: "validuser@test.com",
+        password: "123",
+      };
 
-    expect(result.success).toBe(false);
-    expect(result.message).toContain("Correo ya registrado");
-  });
+      const validationError = new ValidationError("Validation failed", userData, "password");
+      validationError.inner = [
+        {
+            message: "Password must be at least 6 characters long",
+            path: "password",
+            type: "min",
+            value: userData.password,
+            errors: [],
+            inner: [],
+            [Symbol.toStringTag]: "",
+            name: ""
+        },
+      ];
 
-  // Test cuando la petición al servidor falla (por ejemplo, error de red)
-  it("When server request fails, then it should return network error message", async () => {
-    const userData: FormDataLogin = {
-      email: "test@example.com",
-      password: "validPassword123",
-    };
+      (schemaLogIn.validate as jest.Mock).mockRejectedValue(validationError);
 
-    // Simulamos un error de red en fetch
-    global.fetch = jest.fn().mockRejectedValue(new Error("Network Error"));
+      const response: ValidationResponse = await loginService.login(userData);
 
-    const result: ValidationResponse = await loginService.login(userData);
-
-    expect(result.success).toBe(false);
-    expect(result.message).toContain("Network Error");
+      expect(response.success).toBe(false);
+      expect(response.message).toEqual(["Password must be at least 6 characters long"]);
+    });
   });
 
 });

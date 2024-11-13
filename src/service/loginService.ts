@@ -21,7 +21,7 @@ export async function login(userData: FormDataLogin): Promise<ValidationResponse
         const validationError = err as ValidationError;
         return {
             success: false,
-            message: validationError.inner.map(e => e.message) // Devuelve los mensajes de error
+            message: validationError.inner ? validationError.inner.map(e => e.message) : [], // Devuelve los mensajes de error
         };
     }
     
@@ -48,7 +48,7 @@ export async function login(userData: FormDataLogin): Promise<ValidationResponse
         const validationError = err as ValidationError;
         return {
             success: false,
-            message: validationError.inner.map(e => e.message)
+            message: validationError.inner ? validationError.inner.map(e => e.message) : [],
         };
     }
     if (response) {
