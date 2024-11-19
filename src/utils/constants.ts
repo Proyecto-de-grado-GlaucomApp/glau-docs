@@ -1,5 +1,5 @@
 // URL base del API
-export const BASE_URL = "https://3.211.80.218:8000/";
+export const BASE_URL = "https://54.161.44.129:8000/";
 
 /**
  * Enum que representa las diferentes acciones disponibles para la autenticación de usuarios.
