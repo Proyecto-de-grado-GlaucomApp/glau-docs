@@ -1,5 +1,5 @@
 // URL base del API
-export const BASE_URL = "https://loyal-bedbug-dashing.ngrok-free.app:8000/";
+export const BASE_URL = "https://loyal-bedbug-dashing.ngrok-free.app/";
 
 /**
  * Enum que representa las diferentes acciones disponibles para la autenticación de usuarios.
